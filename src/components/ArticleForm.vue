@@ -12,7 +12,7 @@
               <label class="label">Title</label>
               <div class="control has-icons-right">
                 <input :class="{'input': true, 'is-danger': errors.has('title'), 'is-success': !errors.has('title') && fields.title && fields.title.touched }"
-                       type="text" name="title" placeholder="Article Title" v-model="article.title" v-validate="'required|alpha'">
+                       type="text" name="title" placeholder="Article Title" v-model="article.title" v-validate="'required'">
                 <span class="icon is-small is-right" v-show="!errors.has('title') && fields.title && fields.title.touched">
                   <i class="fa fa-check"></i>
                 </span>
@@ -108,11 +108,11 @@
                 </span>
               </div>
             </div>
-
-            <p class="control">
+            <br>
+            <div class="field">
               <button class="button is-primary" :disabled="errors.any()">Submit</button>
               <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
-            </p>
+            </div>
 
           </form>
         </div>
@@ -180,6 +180,13 @@
       onSubmit () {
         this.$validator.validateAll().then((result) => {
           if (result) {
+            this.article.submittedDate = Date.now();
+            this.article.submittedBy = {
+              displayName: this.user.user.displayName,
+              uid: this.user.user.uid,
+              photoUrl: this.user.user.photoURL
+            };
+
             this.$firebaseRefs.articles.push(this.article);
             this.$router.push('/');
           }
@@ -191,6 +198,8 @@
 
 
 <style scoped>
-
+  .tag {
+    margin-right:4px;
+  }
 </style>
 

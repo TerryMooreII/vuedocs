@@ -4,11 +4,11 @@
     <nav class="navbar is-transparent has-shadow">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item is-size-4" href="http://vuedocs.io">
+          <router-link :to="{name: 'articles'}" class="navbar-item is-size-4" href="/">
             <!--<img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"-->
             <!--width="112" height="28">-->
             Vue Docs
-          </a>
+          </router-link>
 
           <div class="navbar-burger burger" data-target="navMenuTransparentExample">
             <span></span>
@@ -21,12 +21,12 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <p class="control" v-if="user && user.user">
-              <router-link :to="{ name: 'add-article'}" class="button is-primary is-outlined">Add Article</router-link>
+              <router-link :to="{name: 'add-article'}" class="button is-primary is-outlined">Add Article</router-link>
             </p>
           </div>
           <div class="navbar-item">
             <p class="control">
-              <a href="#" @click.prevent="login('google')" class="button is-primaryt" v-if="!user || !user.user">
+              <a href="#" @click.prevent="login('google')" class="button is-primary" v-if="!user || !user.user">
                 Login
               </a>
               <a href="#" @click.prevent="logout()" class="button is-primary is-outlined" v-if="user && user.user">
