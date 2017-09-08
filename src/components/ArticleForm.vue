@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-offset-2 is-two-thirds">
-      <article class="message">
+      <article class="message is-primary">
         <div class="message-header">
           <p>Add New Article</p>
         </div>
