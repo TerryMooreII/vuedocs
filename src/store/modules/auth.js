@@ -22,7 +22,7 @@ const actions = {
 // mutations
 const mutations = {
   [types.SET_USER] (state, user) {
-    state.user = user;
+    state.user = user.user;
   }
 };
 

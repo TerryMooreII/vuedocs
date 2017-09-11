@@ -177,7 +177,7 @@
           if (result) {
             this.article.submittedDate = Date.now();
             console.log(this.user);
-            this.article.submittedBy = this.user.user.username;
+            this.article.submittedBy = this.user.username;
 
             axios.post('articles', this.article).then(() => { this.$router.push('/'); });
           }

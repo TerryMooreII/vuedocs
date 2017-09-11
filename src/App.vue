@@ -20,11 +20,11 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <p class="control">
-              <router-link :to="{name: 'register'}" class="button is-primary is-outlined" v-if="!user || !user.user">Register</router-link>
-              <router-link :to="{name: 'login'}" class="button is-primary" v-if="!user || !user.user">Login</router-link>
+              <router-link :to="{name: 'register'}" class="button is-primary is-outlined" v-if="!user">Register</router-link>
+              <router-link :to="{name: 'login'}" class="button is-primary" v-if="!user">Login</router-link>
 
-              <router-link :to="{name: 'add-article'}" class="button is-primary is-outlined" v-if="user && user.user">Add Article</router-link>
-              <a href="#" class="button is-primary" v-if="user && user.user" @click="logout">Logout</a>
+              <router-link :to="{name: 'add-article'}" class="button is-primary is-outlined" v-if="user">Add Article</router-link>
+              <a href="#" class="button is-primary" v-if="user" @click="logout">Logout</a>
             </p>
           </div>
         </div>
