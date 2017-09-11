@@ -3,7 +3,7 @@
     <div class="column is-offset-2 is-two-thirds">
       <article class="message is-primary">
         <div class="message-header">
-          <p>Login</p>
+          <p>Register</p>
         </div>
         <div class="message-body">
           <form @submit.prevent="onSubmit">
@@ -18,6 +18,18 @@
                 </span>
               </div>
               <p v-show="errors.has('username')" class="help is-danger">{{ errors.first('username') }}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control has-icons-right">
+                <input :class="{'input': true, 'is-danger': errors.has('email'), 'is-success': !errors.has('email') && fields.email && fields.email.touched }"
+                       type="email" name="email" placeholder="Email Address" v-model="user.email" v-validate="'required|email'">
+                <span class="icon is-small is-right" v-show="!errors.has('email') && fields.email && fields.email.touched">
+                  <i class="fa fa-check"></i>
+                </span>
+              </div>
+              <p v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</p>
             </div>
 
             <div class="field">
@@ -45,8 +57,7 @@
 </template>
 
 <script>
-import Auth from '../services/Auth';
-import * as types from '../store/mutation-types';
+import axios from 'axios';
 
 export default {
   name: 'register',
@@ -54,15 +65,15 @@ export default {
     return {
       user: {
         username: '',
+        email: '',
         password: ''
       }
     };
   },
   methods: {
     onSubmit () {
-      Auth.login(this.user).then((response) => {
-        this.$store.commit(types.SET_USER, {user: response.user});
-        this.$router.push('/');
+      axios.post('/users', this.user).then(() => {
+        this.$router.push('/login');
       });
     }
   }

@@ -9,17 +9,16 @@
 
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
-        <vd-article v-for="article in articles" :article="article"></vd-article>
+        <vd-article v-for="article in articles" :key="article._id" :article="article"></vd-article>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
   import Search from './Search.vue';
   import VdArticle from './Article.vue';
-
-  import {db} from '../services/FirebaseService';
 
   export default {
     name: 'articles',
@@ -27,21 +26,15 @@
       search: Search,
       'vd-article': VdArticle
     },
-    firebase: {
-      articlesRef: {
-        source: db.ref(`articles`).orderByChild('submittedDate')
-      }
-    },
     data () {
       return {
-
+        articles: []
       };
     },
-    computed: {
-      articles () {
-        return this.articlesRef.sort((a, b) => a.submittedDate < b.submittedDate);
-        // return this.articlesRef.filter(article => article && article.tags && article.tags.indexOf('Router') > -1);
-      }
+    mounted () {
+      axios.get('articles').then(response => {
+        this.articles = response.data;
+      });
     }
   };
 </script>

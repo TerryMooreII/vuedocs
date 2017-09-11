@@ -123,7 +123,7 @@
 
 <script>
   import {mapGetters} from 'vuex';
-  import {db} from '../services/FirebaseService';
+  import axios from 'axios';
 
   export default {
     name: 'add-article',
@@ -161,11 +161,6 @@
         ]
       };
     },
-    firebase: {
-      articles: {
-        source: db.ref(`articles`)
-      }
-    },
     computed: mapGetters({
       user: 'getUser'
     }),
@@ -181,14 +176,10 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.article.submittedDate = Date.now();
-            this.article.submittedBy = {
-              displayName: this.user.user.displayName,
-              uid: this.user.user.uid,
-              photoUrl: this.user.user.photoURL
-            };
+            console.log(this.user);
+            this.article.submittedBy = this.user.user.username;
 
-            this.$firebaseRefs.articles.push(this.article);
-            this.$router.push('/');
+            axios.post('articles', this.article).then(() => { this.$router.push('/'); });
           }
         });
       }

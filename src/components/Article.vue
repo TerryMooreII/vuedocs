@@ -16,7 +16,7 @@
         <p>
           <strong><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
           <br>
-          <em class="is-size-6"><small class="has-text-grey">Submitted By: {{ article.submittedBy.displayName }} on {{ article.submittedDate | toDateString }}</small></em>
+          <em class="is-size-6"><small class="has-text-grey">Submitted By: {{ article.submittedBy }} on {{ article.submittedDate | toDateString }}</small></em>
         </p>
       </div>
       <div>
@@ -30,7 +30,6 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {db} from '../services/FirebaseService';
 
 export default {
   name: 'VdArticle',
@@ -45,43 +44,23 @@ export default {
       return new Date(date).toLocaleString();
     }
   },
-  firebase: {
-    articleRef: {
-      source: db.ref(`articles`)
-    },
-    articleVoteRef: {
-      source: db.ref(`article-vote`)
-    }
-  },
   data () {
     return {
     };
   },
   methods: {
-    getRef () {
-      const clone = Object.assign({}, this.article);
-      const item = this.$firebaseRefs.articleRef.child(clone['.key']);
-      delete clone['.key'];
-      return {
-        clone, item
-      };
-    },
     logVote () {
 
     },
     hasVoted (item) {
       if (item.votes) {
-        // var usersVote =
+
       }
     },
     thumbUp () {
-      const {clone, item} = this.getRef();
-      item.set(Object.assign({thumbsUp: clone.thumbsUp++}, clone));
-      this.logVote();
+
     },
     thumbDown () {
-      const {clone, item} = this.getRef();
-      item.set(Object.assign({thumbsDown: clone.thumbsDown++}, clone));
     }
   },
   computed: {

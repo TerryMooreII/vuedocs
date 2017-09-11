@@ -17,21 +17,14 @@
           </div>
         </div>
 
-
         <div class="navbar-end">
           <div class="navbar-item">
-            <p class="control" v-if="user && user.user">
-              <router-link :to="{name: 'add-article'}" class="button is-primary is-outlined">Add Article</router-link>
-            </p>
-          </div>
-          <div class="navbar-item">
             <p class="control">
-              <a href="#" @click.prevent="login('google')" class="button is-primary" v-if="!user || !user.user">
-                Login
-              </a>
-              <a href="#" @click.prevent="logout()" class="button is-primary is-outlined" v-if="user && user.user">
-                Logout
-              </a>
+              <router-link :to="{name: 'register'}" class="button is-primary is-outlined" v-if="!user || !user.user">Register</router-link>
+              <router-link :to="{name: 'login'}" class="button is-primary" v-if="!user || !user.user">Login</router-link>
+
+              <router-link :to="{name: 'add-article'}" class="button is-primary is-outlined" v-if="user && user.user">Add Article</router-link>
+              <a href="#" class="button is-primary" v-if="user && user.user" @click="logout">Logout</a>
             </p>
           </div>
         </div>
@@ -47,11 +40,10 @@
 </template>
 
 <script>
-  import Firebase from 'firebase';
+  import axios from 'axios';
   import { mapGetters } from 'vuex';
-  import * as types from './store/mutation-types';
-
   import Auth from './services/Auth.js';
+  import * as types from './store/mutation-types';
 
   export default {
     name: 'app',
@@ -59,26 +51,25 @@
       return {
       };
     },
-    beforeCreate () {
-      Firebase.auth().onAuthStateChanged((user) => {
-        this.$store.commit(types.SET_USER, {user: user ? user.toJSON() : null});
-      });
-    },
     methods: {
-      login (provider) {
-        Auth.signInWithProvider(provider, (error) => {
-          if (error) {
-            console.log('Login Error', error);
-          }
-        });
-      },
       logout () {
-        Auth.logout();
+        Auth.logout().then(() => {
+          this.$store.commit(types.SET_USER, {user: null});
+        });
       }
     },
     computed: mapGetters({
       user: 'getUser'
-    })
+    }),
+    created () {
+      const token = localStorage.getItem('id_token');
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.get('users/me').then(response => {
+          this.$store.commit(types.SET_USER, {user: response.data});
+        });
+      }
+    }
   };
 </script>
 
