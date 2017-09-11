@@ -3,11 +3,12 @@
     <div class="media-left">
       <div class="image is-64x64 ">
        <div class="has-text-left cursor-pointer" @click="thumbUp">
-         <i class="fa fa-thumbs-o-up has-text-success"></i> <strong>{{article.thumbsUp}}</strong>
+         <i :class="{fa: true, 'has-text-success': true, 'fa-thumbs-up': this.vote === 1, 'fa-thumbs-o-up': this.vote != 1}"></i> <strong>{{article.thumbsUp}}</strong>
        </div>
 
         <div class="has-text-right cursor-pointer" @click="thumbDown">
-          <strong>{{article.thumbsDown}}</strong> <i class="fa fa-thumbs-o-down has-text-danger"></i>
+          <strong>{{article.thumbsDown}}</strong>
+          <i :class="{fa: true, 'has-text-danger': true, 'fa-thumbs-down': this.vote === -1, 'fa-thumbs-o-down': this.vote !== -1}"></i>
         </div>
       </div>
     </div>
@@ -30,6 +31,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import axios from 'axios';
 
 export default {
   name: 'VdArticle',
@@ -46,21 +48,40 @@ export default {
   },
   data () {
     return {
+      vote: 0
     };
   },
+  mounted () {
+    this.vote = this.hasVote();
+    console.log(this.vote);
+  },
   methods: {
-    logVote () {
-
-    },
-    hasVoted (item) {
-      if (item.votes) {
-
-      }
+    hasVote () {
+      return this.article.votes && this.article.votes[this.user.user._id] ? this.article.votes[this.user.user._id] : 0;
     },
     thumbUp () {
+      // check if users voted and change it also add to remove from thumbs up if they already have a thumbs down vote etc.
 
+      if (this.user) {
+        this.article.thumbsUp++;
+        this.article.votes = this.article.votes || {};
+        this.article.votes[this.user.user._id] = 1;
+        this.save();
+      }
     },
     thumbDown () {
+      if (this.user) {
+        this.article.thumbsDown++;
+        this.article.votes = this.article.votes || {};
+        this.article.votes[this.user.user._id] = -1;
+        this.save();
+      }
+    },
+    save () {
+      axios.put(`articles/${this.article._id}`, this.article).then(response => {
+        this.article.votes = response.data.votes;
+        this.hasVote();
+      });
     }
   },
   computed: {
