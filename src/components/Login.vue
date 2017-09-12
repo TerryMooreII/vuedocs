@@ -7,7 +7,9 @@
         </div>
         <div class="message-body">
           <form @submit.prevent="onSubmit">
-
+            <div class="is-size-5 has-text-danger is-bold has-text-centered" v-if="error">
+              Invalid Username or password.
+            </div>
             <div class="field">
               <label class="label">Username</label>
               <div class="control has-icons-right">
@@ -52,6 +54,7 @@ export default {
   name: 'register',
   data () {
     return {
+      error: null,
       user: {
         username: '',
         password: ''
@@ -60,9 +63,13 @@ export default {
   },
   methods: {
     onSubmit () {
+      this.error = false;
+
       Auth.login(this.user).then((response) => {
         this.$store.commit(types.SET_USER, {user: response.user});
         this.$router.push('/');
+      }).catch(() => {
+        this.error = true;
       });
     }
   }
