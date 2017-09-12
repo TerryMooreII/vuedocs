@@ -4,6 +4,7 @@ import Articles from '@/components/Articles';
 import ArticleForm from '@/components/ArticleForm';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
+import Comments from '@/components/Comment';
 
 Vue.use(Router);
 
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'articles',
       component: Articles
+    },
+    {
+      path: '/:id',
+      name: 'comments',
+      component: Comments
     },
     {
       path: '/add',

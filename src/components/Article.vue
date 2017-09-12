@@ -7,6 +7,7 @@
           <strong><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
           <br>
           <em class="is-size-6"><small class="has-text-grey">Submitted By: {{ article.submittedBy }} on {{ article.submittedDate | toDateString }}</small></em>
+          <router-link :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id">Comments</router-link>
         </p>
       </div>
       <div>
@@ -36,6 +37,8 @@ export default {
     toDateString (date) {
       return new Date(date).toLocaleString();
     }
+  },
+  methods: {
   },
   computed: {
     getHostName () {

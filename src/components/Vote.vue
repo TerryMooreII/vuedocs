@@ -44,6 +44,7 @@
         // check if users voted and change it also add to remove from thumbs up if they already have a thumbs down vote etc.
 
         if (!this.user) {
+          this.$router.push('/');
           return;
         }
 
@@ -64,6 +65,7 @@
       },
       thumbDown () {
         if (!this.user) {
+          this.$router.push('/');
           return;
         }
 

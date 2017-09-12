@@ -1,15 +1,16 @@
 <template>
-  <div class="field has-addons">
-    <div class="control is-expanded">
-      <input class="input" type="text" placeholder="Search For Article" v-model="q">
+  <form @submit.prevent="search">
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Search For Article" v-model="q">
+      </div>
+      <div class="control">
+        <a class="button is-info">
+          Search
+        </a>
+      </div>
     </div>
-    <div class="control">
-      <a class="button is-info" @click="search">
-        Search
-      </a>
-    </div>
-  </div>
-
+  </form>
 </template>
 
 <script>
@@ -24,6 +25,7 @@
     methods: {
       search () {
         this.$router.push('/' + '?q=' + this.q);
+        this.q = '';
       }
     }
   };
