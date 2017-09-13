@@ -1,36 +1,59 @@
 <template>
-  <div>
-    <div class="columns">
-      <div class="column is-offset-1-desktop is-10-desktop">
-        <vd-article :article="article" v-if="article"></vd-article>
+  <article class="media">
+    <!--<figure class="media-left">-->
+    <!--<p class="image is-64x64">-->
+    <!--<img src="http://bulma.io/images/placeholders/128x128.png">-->
+    <!--</p>-->
+    <!--</figure>-->
+    <div class="media-content">
+      <div class="content">
+        <p>
+          {{comment.text}}
+          <br>
+          <strong>John Smith</strong>
+          <small>@johnsmith</small>
+          <small>31m</small>
+        </p>
       </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+          <a class="level-item">
+            <span class="icon is-small"><i class="fa fa-reply" @click="reply = !reply"></i></span>
+          </a>
+          <!--<a class="level-item">-->
+          <!--<span class="icon is-small"><i class="fa fa-retweet"></i></span>-->
+          <!--</a>-->
+          <!--<a class="level-item">-->
+          <!--<span class="icon is-small"><i class="fa fa-heart"></i></span>-->
+          <!--</a>-->
+        </div>
+        <vd-comment-add :comment="comment" v-if="reply"></vd-comment-add>
+      </nav>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>
-  import axios from 'axios';
-  import VdArticle from './Article.vue';
+  import VdCommentAdd from './CommentAdd.vue';
 
   export default {
-    name: 'comment',
+    name: 'VdComment',
     components: {
-      'vd-article': VdArticle
+      'vd-comment-add': VdCommentAdd
+    },
+    props: {
+      comment: {
+        type: Object,
+        required: false
+      }
     },
     data () {
       return {
-        article: {}
+        reply: false
       };
     },
-    beforeRouteEnter (to, from, next) {
-      axios.get(`articles/${to.params.id}`).then((response) => {
-        next(vm => vm.setData(response.data));
-      });
-    },
-    methods: {
-      setData (article) {
-        this.article = article;
-      }
+    mounted () {
+      console.log('from comment', this.comment);
     }
   };
 </script>

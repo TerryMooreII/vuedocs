@@ -4,7 +4,7 @@ import Articles from '@/components/Articles';
 import ArticleForm from '@/components/ArticleForm';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
-import Comments from '@/components/Comment';
+import Comments from '@/components/Comments';
 
 Vue.use(Router);
 
