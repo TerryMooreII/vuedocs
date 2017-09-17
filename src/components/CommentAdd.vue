@@ -7,7 +7,7 @@
     </div>
     <div class="control">
       <button class="button is-primary">Submit</button>
-      <button class="button is-link" type="button">Cancel</button>
+      <button class="button is-link" type="button" @click="$emit('close')" v-if="!showCancel">Cancel</button>
     </div>
   </form>
 </template>
@@ -15,12 +15,17 @@
 <script>
   import axios from 'axios';
   import {mapGetters} from 'vuex';
+  import * as types from '../store/mutation-types';
 
   export default {
     name: 'VdCommentAdd',
     props: {
       comment: {
         type: Object,
+        required: false
+      },
+      showCancel: {
+        type: Boolean,
         required: false
       }
     },
@@ -31,36 +36,29 @@
       return {
         reply: {
           articleId: this.$route.params.id,
+          parentId: null,
           text: '',
-          submittedBy: '',
-          submittedDate: Date.now(),
-          isDeleted: false,
-          replies: []
+          author: '',
+          posted: Date.now(),
+          isDeleted: false
         }
       };
     },
     methods: {
       onSubmit () {
-        if (!this.comment) {
-          axios.post(`comments`, this.reply).then(response => {
-            console.log('Saved root leve;');
-          });
-        } else {
-          let comment = Object.assign({}, this.comment);
-          if (!comment.replies || !Array.isArray(comment.replies)) {
-            comment = {replies: []};
-          }
+        this.reply.author = this.user._id;
 
-          comment.replies.push(this.reply);
-
-          axios.put(`comments/${comment._id}`, comment).then(response => {
-            console.log('saved');
-          });
+        if (this.comment && this.comment._id) {
+          this.reply.parentId = this.comment._id;
         }
+
+        axios.post(`comments`, this.reply).then(response => {
+          console.log('comment post response', response.data);
+          this.reply.text = '';
+          this.$emit('close');
+          this.$store.commit(types.COMMENT_ADDED, {comment: response.data});
+        });
       }
-    },
-    mounted () {
-      console.log('Mounted with comment', this.comment);
     }
   };
 </script>

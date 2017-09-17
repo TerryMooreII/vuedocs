@@ -8,10 +8,12 @@ import App from './App';
 import router from './router';
 import store from './store';
 import axios from 'axios';
+import VueTimeagoFilter from './filters/timeago';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
+Vue.use(VueTimeagoFilter);
 
 /* eslint-disable no-new */
 new Vue({

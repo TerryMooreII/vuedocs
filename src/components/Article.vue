@@ -6,17 +6,22 @@
         <p>
           <strong><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
           <br>
-          <em class="is-size-6"><small class="has-text-grey">Submitted By: {{ article.submittedBy }} on {{ article.submittedDate | toDateString }}</small></em>
-          <router-link :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id">Comments</router-link>
+          <em class="is-size-6">
+            <small class="has-text-grey">
+              Submitted By: {{ article.submittedBy }} <span :title="article.submittedDate | toDateString">{{ article.submittedDate | timeago }}</span>
+            </small>
+          </em>
+          <br>
+          <router-link :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
+             Comments
+          </router-link>
         </p>
       </div>
       <div>
         <span class="tag is-primary is-capitalized" v-for="tag in article.tags">{{tag}}</span>
       </div>
     </div>
-
   </article>
-
 </template>
 
 <script>
@@ -31,6 +36,10 @@ export default {
     article: {
       type: Object | String,
       required: true
+    },
+    hideCommentLink: {
+      type: Boolean,
+      required: false
     }
   },
   filters: {

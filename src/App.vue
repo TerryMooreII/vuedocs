@@ -5,8 +5,8 @@
       <div class="container">
         <div class="navbar-brand">
           <router-link :to="{name: 'articles'}" class="navbar-item is-size-4" href="/">
-            <!--<img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"-->
-            <!--width="112" height="28">-->
+            <img src="./assets/logo.png" alt="Vue Docs"
+            width="42" height="42">
             Vue Docs
           </router-link>
 

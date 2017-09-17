@@ -8,27 +8,29 @@
     <div class="media-content">
       <div class="content">
         <p>
-          {{comment.text}}
+          <strong>{{comment.author.username}}</strong>
+          <small>{{comment.posted | timeago}}</small>
           <br>
-          <strong>John Smith</strong>
-          <small>@johnsmith</small>
-          <small>31m</small>
+          {{comment.text}}
         </p>
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-reply" @click="reply = !reply"></i></span>
+          <a class="level-item" @click="reply = !reply">
+            <span class="icon is-small"><i class="fa fa-reply" ></i></span>&nbspReply
           </a>
-          <!--<a class="level-item">-->
-          <!--<span class="icon is-small"><i class="fa fa-retweet"></i></span>-->
-          <!--</a>-->
-          <!--<a class="level-item">-->
-          <!--<span class="icon is-small"><i class="fa fa-heart"></i></span>-->
-          <!--</a>-->
+          <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike
+          </a>
+          <a class="level-item">
+            <span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet
+          </a>
+          <a class="level-item">
+            <span class="icon is-small"><i class="fa fa-link"></i></span>&nbspPermalink
+          </a>
         </div>
-        <vd-comment-add :comment="comment" v-if="reply"></vd-comment-add>
       </nav>
+      <vd-comment-add :comment="comment" v-if="reply" v-on:close="reply = false"></vd-comment-add>
     </div>
   </article>
 </template>
@@ -51,9 +53,6 @@
       return {
         reply: false
       };
-    },
-    mounted () {
-      console.log('from comment', this.comment);
     }
   };
 </script>
