@@ -10,10 +10,20 @@
         <vd-comment-add :showCancel="true"></vd-comment-add>
       </div>
     </div>
+    <div class="columns" v-if="$route.query.thread">
+      <div class="column is-offset-1-desktop is-10-desktop">
+        <div class="notification is-warning">
+          You are only view a single comment thread.
+          <br>
+          <router-link :to="{path: $route.path}">view the rest of the comments</router-link>
+        </div>
+      </div>
+    </div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
-        <vd-comment v-for="comment in comments" :comment="comment"
-                    :style="{'padding-left': replyPos(comment.slug) + 'px'}"></vd-comment>
+        <vd-comment v-for="comment in comments" :key="comment._id" :comment="comment"
+                    :style="{'padding-left': replyPos(comment.slug) + 'px'}">
+        </vd-comment>
       </div>
     </div>
   </div>
@@ -51,16 +61,22 @@
         this.getComments();
       },
       getComments () {
-        axios.get(`articles/${this.$route.params.id}/comments`).then(response => {
+        const thread = this.$route.query.thread || '';
+
+        axios.get(`articles/${this.$route.params.id}/comments?thread=${thread}`).then(response => {
           this.comments = response.data;
         });
       },
       replyPos (slug) {
         const replyMargin = 50;
+
         if (!slug) {
           return 0;
         }
-        return slug.split('').filter(l => l === '/').length * replyMargin;
+
+        const threadStartLevel = this.$route.query.thread ? this.$route.query.thread.split('').filter(l => l === '/').length : 0;
+
+        return (slug.split('').filter(l => l === '/').length - threadStartLevel) * replyMargin;
       }
     },
     computed: mapGetters({
@@ -71,6 +87,12 @@
         if (newComment) {
           this.getComments();
         }
+      },
+      $route (newVal, oldVal) {
+        if (newVal === oldVal) {
+          return;
+        }
+        this.getComments();
       }
     }
   };

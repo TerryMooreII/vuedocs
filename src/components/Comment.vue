@@ -11,21 +11,21 @@
           <strong>{{comment.author.username}}</strong>
           <small>{{comment.posted | timeago}}</small>
           <br>
-          {{comment.text}}
+          <span>{{comment.text}}</span>
         </p>
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item" @click="reply = !reply">
-            <span class="icon is-small"><i class="fa fa-reply" ></i></span>&nbspReply
+            <span class="icon is-small"><i class="fa fa-reply"></i></span>&nbspReply
           </a>
           <a class="level-item">
-          <span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike
+            <span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike
           </a>
           <a class="level-item">
             <span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet
           </a>
-          <a class="level-item">
+          <a class="level-item" @click="permalink()">
             <span class="icon is-small"><i class="fa fa-link"></i></span>&nbspPermalink
           </a>
         </div>
@@ -53,6 +53,11 @@
       return {
         reply: false
       };
+    },
+    methods: {
+      permalink () {
+        this.$router.push(this.$route.path + '?thread=' + this.comment.slug);
+      }
     }
   };
 </script>

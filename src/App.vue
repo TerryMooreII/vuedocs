@@ -6,7 +6,7 @@
         <div class="navbar-brand">
           <router-link :to="{name: 'articles'}" class="navbar-item is-size-4" href="/">
             <img src="./assets/logo.png" alt="Vue Docs"
-            width="42" height="42">
+            width="28" height="28">
             Vue Docs
           </router-link>
 
@@ -83,7 +83,12 @@
     cursor: pointer;
   }
 
-  #app {
+  .navbar-brand img {
+    margin-right: 5px;
+  }
 
+  body {
+    font-size: .9rem;
+    line-height: 1.2;
   }
 </style>

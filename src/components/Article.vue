@@ -4,7 +4,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
+          <strong class="is-size-5"><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
           <br>
           <em class="is-size-6">
             <small class="has-text-grey">
