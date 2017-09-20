@@ -19,12 +19,9 @@
           <a class="level-item" @click="reply = !reply">
             <span class="icon is-small"><i class="fa fa-reply"></i></span>&nbspReply
           </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet
-          </a>
+          <!--<a class="level-item">-->
+            <!--<span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike-->
+          <!--</a>-->
           <a class="level-item" @click="permalink()">
             <span class="icon is-small"><i class="fa fa-link"></i></span>&nbspPermalink
           </a>

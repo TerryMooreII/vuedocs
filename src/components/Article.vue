@@ -12,9 +12,13 @@
             </small>
           </em>
           <br>
-          <router-link :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
-             Comments
+          <router-link class="has-text-grey-dark" :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
+            {{article.commentCount || 0}} Comments
           </router-link>
+          <a class="twitter-share-button has-text-grey-dark" target="_blank"
+               :href="twitterUrl">
+            <span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet
+          </a>
         </p>
       </div>
       <div>
@@ -50,6 +54,9 @@ export default {
   methods: {
   },
   computed: {
+    twitterUrl () {
+      return `https://twitter.com/intent/tweet?text=${this.article.title} ${this.article.url} @vuedocs`;
+    },
     getHostName () {
       if (!this.article || !this.article.url) {
         return '';
@@ -76,4 +83,5 @@ export default {
 
 <style scoped>
   .tag{ margin-left: 4px }
+  .twitter-share-button{ margin-left: 4px }
 </style>

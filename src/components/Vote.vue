@@ -44,7 +44,7 @@
         // check if users voted and change it also add to remove from thumbs up if they already have a thumbs down vote etc.
 
         if (!this.user) {
-          this.$router.push('/');
+          console.log('you must be logged in to vote');
           return;
         }
 
@@ -65,7 +65,7 @@
       },
       thumbDown () {
         if (!this.user) {
-          this.$router.push('/');
+          console.log('you must be logged in to vote');
           return;
         }
 

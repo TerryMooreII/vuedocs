@@ -178,9 +178,10 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.article.submittedDate = Date.now();
-            console.log(this.user);
             this.article.submittedBy = this.user.username;
-
+            if (!this.article.url.startsWith('http')) {
+              this.article.url = 'http://' + this.article.url;
+            }
             axios.post('articles', this.article).then(() => { this.$router.push('/'); });
           }
         });

@@ -1,12 +1,15 @@
 <template>
   <form @submit.prevent="onSubmit">
+    <p class="help has-text-danger" v-if="!user">
+      You must be logged in to comment.
+    </p>
     <div class="field">
       <div class="control">
-        <textarea class="textarea is-primary" type="text" placeholder="Comment" v-model="reply.text"></textarea>
+        <textarea class="textarea is-primary" type="text" placeholder="Comment" v-model="reply.text" :disabled="!user"></textarea>
       </div>
     </div>
     <div class="control">
-      <button class="button is-primary">Submit</button>
+      <button class="button is-primary" :disabled="!user">Submit</button>
       <button class="button is-link" type="button" @click="$emit('close')" v-if="!showCancel">Cancel</button>
     </div>
   </form>
