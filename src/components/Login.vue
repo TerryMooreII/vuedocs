@@ -54,6 +54,7 @@ export default {
   name: 'register',
   data () {
     return {
+      redirect: '/',
       error: null,
       user: {
         username: '',
@@ -61,13 +62,20 @@ export default {
       }
     };
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => { vm.redirect = from.path; });
+  },
   methods: {
     onSubmit () {
       this.error = false;
 
       Auth.login(this.user).then((response) => {
         this.$store.commit(types.SET_USER, {user: response.user});
-        this.$router.push('/');
+        if (this.redirect.startsWith('/login')) {
+          this.redirect = '/';
+        }
+
+        this.$router.push(this.redirect);
       }).catch(() => {
         this.error = true;
       });

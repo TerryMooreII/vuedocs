@@ -1,17 +1,14 @@
 <template>
   <article class="media">
-    <!--<figure class="media-left">-->
-    <!--<p class="image is-64x64">-->
-    <!--<img src="http://bulma.io/images/placeholders/128x128.png">-->
-    <!--</p>-->
-    <!--</figure>-->
     <div class="media-content">
       <div class="content">
         <p>
           <strong>{{comment.author.username}}</strong>
           <small>{{comment.posted | timeago}}</small>
+          <small v-if="comment.isEdited" class="has-text-grey">(Edited)</small>
           <br>
-          <span>{{comment.text}}</span>
+          <span v-if="!isEditing">{{comment.text}}</span>
+          <vd-comment-edit :comment="comment" v-if="isEditing" v-on:close="isEditing = false"></vd-comment-edit>
         </p>
       </div>
       <nav class="level is-mobile">
@@ -19,11 +16,11 @@
           <a class="level-item" @click="reply = !reply">
             <span class="icon is-small"><i class="fa fa-reply"></i></span>&nbspReply
           </a>
-          <!--<a class="level-item">-->
-            <!--<span class="icon is-small"><i class="fa fa-heart"></i></span>&nbspLike-->
-          <!--</a>-->
           <a class="level-item" @click="permalink()">
             <span class="icon is-small"><i class="fa fa-link"></i></span>&nbspPermalink
+          </a>
+          <a class="level-item" v-if="this.user && this.user._id === this.comment.author._id" @click="isEditing = !isEditing">
+            <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbspEdit
           </a>
         </div>
       </nav>
@@ -33,12 +30,15 @@
 </template>
 
 <script>
+  import {mapGetters} from 'Vuex';
   import VdCommentAdd from './CommentAdd.vue';
+  import VdCommentEdit from './CommentEdit.vue';
 
   export default {
     name: 'VdComment',
     components: {
-      'vd-comment-add': VdCommentAdd
+      'vd-comment-add': VdCommentAdd,
+      'vd-comment-edit': VdCommentEdit
     },
     props: {
       comment: {
@@ -48,6 +48,7 @@
     },
     data () {
       return {
+        isEditing: false,
         reply: false
       };
     },
@@ -55,7 +56,10 @@
       permalink () {
         this.$router.push(this.$route.path + '?thread=' + this.comment.slug);
       }
-    }
+    },
+    computed: mapGetters({
+      user: 'getUser'
+    })
   };
 </script>
 

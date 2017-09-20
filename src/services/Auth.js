@@ -10,7 +10,6 @@ export default {
     });
   },
   logout () {
-    console.log('called?');
     return axios.get('/logout').then(() => {
       axios.defaults.headers.common['Authorization'] = null;
       localStorage.removeItem('id_token');
