@@ -51,7 +51,7 @@ import Auth from '../services/Auth';
 import * as types from '../store/mutation-types';
 
 export default {
-  name: 'register',
+  name: 'VdLogin',
   data () {
     return {
       redirect: '/',

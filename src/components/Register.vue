@@ -60,7 +60,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'register',
+  name: 'VdRegister',
   data () {
     return {
       user: {

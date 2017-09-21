@@ -37,7 +37,7 @@
   import VdCommentAdd from './CommentAdd.vue';
 
   export default {
-    name: 'comments',
+    name: 'VdComments',
     components: {
       'vd-article': VdArticle,
       'vd-comment': VdComment,

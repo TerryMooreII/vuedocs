@@ -8,14 +8,14 @@
           <br>
           <em class="is-size-6">
             <small class="has-text-grey">
-              Submitted By: {{ article.submittedBy }} <span :title="article.submittedDate | toDateString">{{ article.submittedDate | timeago }}</span>
+              <strong>{{ article.submittedBy }}</strong> <span :title="article.submittedDate | toDateString">{{ article.submittedDate | timeago }}</span>
             </small>
           </em>
           <br>
-          <router-link class="has-text-grey-dark" :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
+          <router-link class="has-text-grey" :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
             {{article.commentCount || 0}} Comments
           </router-link>
-          <a class="twitter-share-button has-text-grey-dark" target="_blank"
+          <a class="twitter-share-button has-text-grey" target="_blank"
                :href="twitterUrl">
             <span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet
           </a>

@@ -126,7 +126,7 @@
   import axios from 'axios';
 
   export default {
-    name: 'add-article',
+    name: 'VdArticleForm',
     data () {
       return {
         tag: null,
@@ -196,4 +196,3 @@
     margin-right:4px;
   }
 </style>
-
