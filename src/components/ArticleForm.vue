@@ -137,8 +137,8 @@
           submittedDate: '',
           type: '',
           tags: [],
-          thumbsDown: 0,
-          thumbsUp: 0,
+          votesDown: 0,
+          votesUp: 0,
           title: '',
           url: '',
           version: ''

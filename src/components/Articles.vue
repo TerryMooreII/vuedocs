@@ -26,6 +26,7 @@
   import Search from './Search.vue';
   import VdArticle from './Article.vue';
   import VdPager from './Pager.vue';
+  import * as urlHelpers from '../services/urlHelpers';
 
   export default {
     name: 'VdArticles',
@@ -53,20 +54,10 @@
     },
     methods: {
       getArticles () {
-        const query = this.$route.query ? '?' + this.queryStringSerializer(this.$route.query) : '';
+        const query = this.$route.query ? '?' + urlHelpers.serialize(this.$route.query) : '';
         axios.get('articles' + query).then(response => {
           this.articles = response.data;
         });
-      },
-      queryStringSerializer (obj) {
-        let str = [];
-        for (let p in obj) {
-          if (obj.hasOwnProperty(p)) {
-            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-          }
-        }
-
-        return str.join('&');
       }
     },
     mounted () {

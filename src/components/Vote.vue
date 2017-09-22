@@ -1,16 +1,14 @@
 <template>
   <div class="media-left">
-    <div class="image is-64x64 ">
-      <div class="has-text-left cursor-pointer" @click="thumbUp">
-        <i
-          :class="{fa: true, 'has-text-success': true, 'fa-thumbs-up': this.vote === 1, 'fa-thumbs-o-up': this.vote != 1}"></i>
-        <strong>{{article.thumbsUp}}</strong>
+    <div class="image has-text-centered has-text-grey">
+      <div @click="voteUp">
+        <i :class="{fa: true, 'fa-caret-up': true, 'has-text-success': this.vote === 1}"></i>
       </div>
-
-      <div class="has-text-right cursor-pointer" @click="thumbDown">
-        <strong>{{article.thumbsDown}}</strong>
-        <i
-          :class="{fa: true, 'has-text-danger': true, 'fa-thumbs-down': this.vote === -1, 'fa-thumbs-o-down': this.vote !== -1}"></i>
+      <div class="total">
+        {{article.votesUp - article.votesDown}}
+      </div>
+      <div @click="voteDown">
+        <i :class="{fa: true, 'fa-caret-down': true, 'has-text-danger': this.vote === -1}"></i>
       </div>
     </div>
   </div>
@@ -40,8 +38,8 @@
       hasVote () {
         return this.user && this.article.votes && this.article.votes[this.user._id] ? this.article.votes[this.user._id] : 0;
       },
-      thumbUp () {
-        // check if users voted and change it also add to remove from thumbs up if they already have a thumbs down vote etc.
+      voteUp () {
+        // check if users voted and change it also add to remove from votes up if they already have a votes down vote etc.
 
         if (!this.user) {
           console.log('you must be logged in to vote');
@@ -49,13 +47,13 @@
         }
 
         if (this.vote === -1) {
-          this.article.thumbsDown--;
+          this.article.votesDown--;
         }
 
         if (this.vote === 0 || this.vote === -1) {
-          this.article.thumbsUp++;
+          this.article.votesUp++;
         } else if (this.vote === 1) {
-          this.article.thumbsUp--;
+          this.article.votesUp--;
         }
 
         this.article.votes = this.article.votes || {};
@@ -63,20 +61,20 @@
 
         this.save();
       },
-      thumbDown () {
+      voteDown () {
         if (!this.user) {
           console.log('you must be logged in to vote');
           return;
         }
 
         if (this.vote === 1) {
-          this.article.thumbsUp--;
+          this.article.votesUp--;
         }
 
         if (this.vote === 0 || this.vote === 1) {
-          this.article.thumbsDown++;
+          this.article.votesDown++;
         } else if (this.vote === -1) {
-          this.article.thumbsDown--;
+          this.article.votesDown--;
         }
 
         this.article.votes = this.article.votes || {};
@@ -99,5 +97,13 @@
 
 
 <style scoped>
-
+  .media-left {
+    margin: -5px 20px auto 20px;
+  }
+  .total {
+    margin: 4px auto;
+  }
+  .fa {
+    font-size:1.8em
+  }
 </style>

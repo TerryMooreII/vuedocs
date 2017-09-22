@@ -22,6 +22,9 @@
           <a class="level-item" v-if="this.user && this.user._id === this.comment.author._id" @click="isEditing = !isEditing">
             <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbspEdit
           </a>
+          <a class="level-item has-text-danger" v-if="canDelete" @click="removeComment">
+            <span class="icon is-small"><i class="fa fa-trash"></i></span>&nbspDelete
+          </a>
         </div>
       </nav>
       <vd-comment-add :comment="comment" v-if="reply" v-on:close="reply = false"></vd-comment-add>
@@ -31,6 +34,7 @@
 
 <script>
   import {mapGetters} from 'Vuex';
+  import axios from 'axios';
   import VdCommentAdd from './CommentAdd.vue';
   import VdCommentEdit from './CommentEdit.vue';
 
@@ -55,11 +59,20 @@
     methods: {
       permalink () {
         this.$router.push(this.$route.path + '?thread=' + this.comment.slug);
+      },
+      removeComment () {
+        axios.delete(`comments/${this.comment._id}`).then(response => { console.log('Comment Deleted'); });
       }
     },
-    computed: mapGetters({
-      user: 'getUser'
-    })
+    computed: {
+      ...mapGetters({
+        user: 'getUser'
+      }),
+      canDelete () {
+        return this.user &&
+          this.user.scope.filter(scope => scope === 'admin' || scope === 'moderator').length > 0;
+      }
+    }
   };
 </script>
 

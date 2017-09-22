@@ -6,11 +6,11 @@
         <p>
           <strong class="is-size-5"><a :href="article.url">{{article.title}}</a></strong> <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
           <br>
-          <em class="is-size-6">
+          <span class="is-size-6">
             <small class="has-text-grey">
-              <strong>{{ article.submittedBy }}</strong> <span :title="article.submittedDate | toDateString">{{ article.submittedDate | timeago }}</span>
+              <span class="has-text-grey-dark">{{ article.submittedBy }}</span> <em :title="article.submittedDate | toDateString">{{ article.submittedDate | timeago }}</em>
             </small>
-          </em>
+          </span>
           <br>
           <router-link class="has-text-grey" :to="{ name: 'comments', params: { id: article._id }}" v-if="article._id && !hideCommentLink">
             {{article.commentCount || 0}} Comments
