@@ -9,6 +9,7 @@
       </div>
     </section>
     <notifications group="messages" position="top center"/>
+    <vd-footer></vd-footer>
   </div>
 </template>
 
@@ -16,12 +17,15 @@
   import axios from 'axios';
   import { mapGetters } from 'vuex';
   import * as types from './store/mutation-types';
-  import VdNavbar from './components/navbar';
+  import VdNavbar from './components/Navbar';
+  import VdFooter from './components/Footer';
 
   export default {
     name: 'app',
     components: {
-      'vd-navbar': VdNavbar
+      VdFooter,
+      'vd-navbar': VdNavbar,
+      'vd-footer': VdFooter
     },
     data () {
       return {

@@ -20,7 +20,7 @@ export default {
   },
   data () {
     return {
-      itemsPerPage: 25
+      itemsPerPage: 20
     };
   },
   methods: {
