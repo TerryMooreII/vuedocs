@@ -19,7 +19,7 @@
           <a class="level-item" @click="permalink()">
             <span class="icon is-small"><i class="fa fa-link"></i></span>&nbspPermalink
           </a>
-          <a class="level-item" v-if="this.user && this.user._id === this.comment.author._id" @click="isEditing = !isEditing">
+          <a class="level-item" v-if="!comment.isDeleted && user && user._id === comment.author._id" @click="isEditing = !isEditing">
             <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbspEdit
           </a>
           <a class="level-item has-text-danger" v-if="canDelete" @click="removeComment">

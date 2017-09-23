@@ -42,7 +42,7 @@
         // check if users voted and change it also add to remove from votes up if they already have a votes down vote etc.
 
         if (!this.user) {
-          console.log('you must be logged in to vote');
+          this.accessMessage();
           return;
         }
 
@@ -63,7 +63,7 @@
       },
       voteDown () {
         if (!this.user) {
-          console.log('you must be logged in to vote');
+          this.accessMessage();
           return;
         }
 
@@ -85,6 +85,13 @@
         axios.put(`articles/${this.article._id}`, this.article).then(response => {
           this.article.votes = response.data.votes;
         });
+      },
+      accessMessage () {
+        this.$notify({
+          group: 'messages',
+          type: 'warn',
+          text: 'You must be logged in to vote'
+        });
       }
     },
     computed: {
@@ -98,7 +105,7 @@
 
 <style scoped>
   .media-left {
-    margin: -5px 20px auto 20px;
+    margin: 0px 20px auto 20px;
   }
   .total {
     margin: 4px auto;

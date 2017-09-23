@@ -62,14 +62,6 @@
     },
     mounted () {
       this.getArticles();
-
-      this.$notify({
-        group: 'messages',
-        title: 'Important message',
-        type: 'error',
-        text: 'Hello user! This is a notification!',
-        position: ['bottom', 'left']
-      });
     }
   };
 </script>

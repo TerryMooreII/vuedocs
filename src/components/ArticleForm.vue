@@ -30,38 +30,9 @@
                   <i class="fa fa-check"></i>
                 </span>
               </div>
+              <p class="help has-text-grey">Please remove tracking parameters from the end of the URL</p>
               <p v-show="errors.has('url')" class="help is-danger">{{ errors.first('url') }}</p>
             </div>
-
-            <!--<div class="columns">-->
-              <!--<div class="column">-->
-                <!--<div class="field">-->
-                  <!--<label class="label">Author</label>-->
-                  <!--<div class="control has-icons-right">-->
-                    <!--<input :class="{'input': true, 'is-danger': errors.has('author'), 'is-success': !errors.has('author') && fields.author && fields.author.touched }"-->
-                           <!--name="author" type="text" placeholder="Who Wrote It" v-model="article.author" v-validate="'required'">-->
-                    <!--<span class="icon is-small is-right" v-show="!errors.has('author') && fields.author && fields.author.touched">-->
-                  <!--<i class="fa fa-check"></i>-->
-                <!--</span>-->
-                  <!--</div>-->
-                  <!--<p v-show="errors.has('author')" class="help is-danger">{{ errors.first('author') }}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-
-              <!--<div class="column">-->
-                <!--<div class="field">-->
-                  <!--<label class="label">Published</label>-->
-                  <!--<div class="control has-icons-right">-->
-                    <!--<input :class="{'input': true, 'is-danger': errors.has('publishedDate'), 'is-success': !errors.has('publishedDate') && fields.publishedDate && fields.publishedDate.touched }"-->
-                           <!--name="publishedDate" data-vv-as="publish date" type="text" placeholder="When Was It Published" v-model="article.publishedDate" v-validate="'required'">-->
-                    <!--<span class="icon is-small is-right" v-show="!errors.has('publishedDate') && fields.publishedDate && fields.publishedDate.touched">-->
-                  <!--<i class="fa fa-check"></i>-->
-                <!--</span>-->
-                  <!--</div>-->
-                  <!--<p v-show="errors.has('publishedDate')" class="help is-danger">{{ errors.first('publishedDate') }}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
 
             <div class="columns">
               <div class="column">
@@ -93,8 +64,7 @@
                 </div>
               </div>
             </div>
-
-
+            
             <div class="field">
               <label class="label">Tags</label>
               <div class="control has-icons-right">
@@ -147,10 +117,13 @@
           { title: 'Blog', value: 'blog' },
           { title: 'How To', value: 'how-to' },
           { title: 'Video', value: 'video' },
-          { title: 'Code Sample', value: 'code-sample' },
+          { title: 'Code', value: 'code' },
+          { title: 'Plugin/Component', value: 'plugin-component' },
           { title: 'Other', value: 'other' }
         ],
         versions: [
+          'All',
+          'N/A',
           '1.x',
           '2.x',
           '2.0.x',
@@ -158,8 +131,7 @@
           '2.2.x',
           '2.3.x',
           '2.4.x',
-          'All',
-          'N/A'
+          '2.5.x'
         ]
       };
     },
@@ -182,7 +154,14 @@
             if (!this.article.url.startsWith('http')) {
               this.article.url = 'http://' + this.article.url;
             }
-            axios.post('articles', this.article).then(() => { this.$router.push('/'); });
+            axios.post('articles', this.article).then(() => {
+              this.$notify({
+                group: 'messages',
+                type: 'success',
+                text: 'Article Successfully Added'
+              });
+              this.$router.push('/');
+            });
           }
         });
       }

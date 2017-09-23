@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <p class="help has-text-danger" v-if="!user">
-      You must be logged in to comment.
+      You must be  <router-link :to="{ name: 'login'}">logged in</router-link> to comment.
     </p>
     <div class="field">
       <div class="control">

@@ -33,11 +33,14 @@
               </div>
               <p v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</p>
             </div>
-
+            <div class="field is-pulled-right">
+              <router-link :to="{ name: 'register'}" class="button is-default is-link">Register</router-link>
+            </div>
             <div class="field">
               <button class="button is-primary" :disabled="errors.any()">Submit</button>
               <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
             </div>
+
 
           </form>
         </div>

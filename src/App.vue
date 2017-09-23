@@ -8,7 +8,7 @@
         <router-view></router-view>
       </div>
     </section>
-    <notifications group="messages" />
+    <notifications group="messages" position="top center"/>
   </div>
 </template>
 
@@ -25,12 +25,25 @@
     },
     data () {
       return {
+
       };
     },
     computed: mapGetters({
       user: 'getUser'
     }),
     created () {
+      axios.interceptors.response.use(response => {
+        return response;
+      }, (error) => {
+        this.$notify({
+          group: 'messages',
+          title: 'Error',
+          type: 'error',
+          text: error.response.data.message || 'Unexpected Error'
+        });
+        return Promise.reject(error);
+      });
+
       const token = localStorage.getItem('id_token');
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
