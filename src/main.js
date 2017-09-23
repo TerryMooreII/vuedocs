@@ -3,6 +3,7 @@
 
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
+import Notifications from 'vue-notification';
 
 import App from './App';
 import router from './router';
@@ -14,6 +15,7 @@ axios.defaults.baseURL = 'http://localhost:3000';
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
 Vue.use(VueTimeagoFilter);
+Vue.use(Notifications);
 
 /* eslint-disable no-new */
 new Vue({

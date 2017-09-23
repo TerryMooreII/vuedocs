@@ -8,6 +8,7 @@
         <router-view></router-view>
       </div>
     </section>
+    <notifications group="messages" />
   </div>
 </template>
 
