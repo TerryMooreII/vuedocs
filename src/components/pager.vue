@@ -1,5 +1,5 @@
 <template>
-  <nav class="pagination is-small is-centered" role="navigation" aria-label="pagination" v-if="total < itemsPerPage">
+  <nav class="pagination is-small is-centered" role="navigation" aria-label="pagination" v-if="total <= itemsPerPage">
     <a class="pagination-previous" v-if="page > 1" @click="change(-1)">Previous</a>
     <a class="pagination-next" v-if="total === itemsPerPage" @click="change(1)">Next</a>
   </nav>
@@ -11,7 +11,8 @@ export default {
   props: {
     page: {
       type: String,
-      required: false
+      required: false,
+      default: 1
     },
     total: {
       type: Number,
