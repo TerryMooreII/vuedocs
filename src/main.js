@@ -11,7 +11,7 @@ import store from './store';
 import axios from 'axios';
 import VueTimeagoFilter from './filters/timeago';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = process.env.API_URL;
 
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
