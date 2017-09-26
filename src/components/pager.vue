@@ -12,7 +12,7 @@ export default {
     page: {
       type: String,
       required: false,
-      default: 1
+      default: '1'
     },
     total: {
       type: Number,
@@ -28,8 +28,9 @@ export default {
     change (val) {
       let query = this.$route.query;
       query.page = this.page ? parseInt(this.page) + val : 1;
+
       this.$router.push({
-        name: this.$route.path,
+        name: 'articles',
         query
       });
     }

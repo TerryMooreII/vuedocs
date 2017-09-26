@@ -10,6 +10,7 @@
     </section>
     <notifications group="messages" position="top center"/>
     <vd-footer></vd-footer>
+    <vd-loading></vd-loading>
   </div>
 </template>
 
@@ -19,18 +20,15 @@
   import * as types from './store/mutation-types';
   import VdNavbar from './components/Navbar';
   import VdFooter from './components/Footer';
+  import VdLoading from './components/Loading.vue';
 
   export default {
     name: 'app',
     components: {
       VdFooter,
       'vd-navbar': VdNavbar,
-      'vd-footer': VdFooter
-    },
-    data () {
-      return {
-
-      };
+      'vd-footer': VdFooter,
+      'vd-loading': VdLoading
     },
     computed: mapGetters({
       user: 'getUser'

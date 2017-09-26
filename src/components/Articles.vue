@@ -17,6 +17,7 @@
         <search></search>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -26,6 +27,7 @@
   import Search from './Search.vue';
   import VdArticle from './Article.vue';
   import VdPager from './Pager.vue';
+
   import * as urlHelpers from '../services/urlHelpers';
 
   export default {

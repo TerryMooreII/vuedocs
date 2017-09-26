@@ -4,8 +4,8 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong class="is-size-5"><a :href="article.url">{{article.title}}</a></strong>
-          <small><em><a class="has-text-grey-dark" :href="article.url">({{getHostName}})</a></em></small>
+          <strong class="is-size-5 "><a :href="article.url" class="article-title">{{article.title}}</a></strong>
+          <small><em>(<a class="has-text-grey-dark article-domain" :href="article.url">{{getHostName}}</a>)</em></small>
         </p>
         <p class="info">
           <span class="has-text-grey-dark">{{article.submittedBy}}</span>
@@ -50,7 +50,6 @@
         return new Date(date).toLocaleString();
       }
     },
-    methods: {},
     computed: {
       twitterUrl () {
         return `https://twitter.com/intent/tweet?text=${this.article.title} ${this.article.url} @vuedocs`;
@@ -106,6 +105,13 @@
   }
 
   .comment a:hover {
+    text-decoration: underline;
+  }
+
+  .article-title:hover {
+    color: #7a7a7a;
+  }
+  .article-domain  {
     text-decoration: underline;
   }
 </style>
