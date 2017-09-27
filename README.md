@@ -1,6 +1,26 @@
-# vue-docs
+Vuedocs.io
+--------------
 
-> Community docs for Vue.js
+> A curated list of community submitted articles for Vue.js
+
+
+This is in response the the Angular community having their ngdoc.io site.
+
+
+### TODO
+
+- [ ] Vote up/down on comments
+- [ ] Top, latest and latest comments tabs
+- [ ] Filter by tags
+- [ ] Filter by user
+- [ ] Transitions
+- [ ] Code Cleanup
+- [ ] Unit Test (yeah, i know it shouldnt be last)
+- [ ] Admin page to manage users
+- [ ] Add Moderators
+- [ ] Code Cleanup (ex. Cleanup axios interceptors)
+
+
 
 ## Build Setup
 
