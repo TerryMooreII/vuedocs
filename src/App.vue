@@ -34,9 +34,28 @@
       user: 'getUser'
     }),
     created () {
+      // This needs refactored
+      let count = 0;
+      axios.interceptors.request.use((config) => {
+        count++;
+        this.$store.commit(types.LOADING, {isLoading: true});
+        return config;
+      }, (error) => {
+        this.$store.commit(types.LOADING, {isLoading: false});
+        return Promise.reject(error);
+      });
+
       axios.interceptors.response.use(response => {
+        count--;
+        if (count >= 0) {
+          this.$store.commit(types.LOADING, {isLoading: false});
+        }
+
         return response;
       }, (error) => {
+        count--;
+        this.$store.commit(types.LOADING, {isLoading: false});
+
         this.$notify({
           group: 'messages',
           title: 'Error',

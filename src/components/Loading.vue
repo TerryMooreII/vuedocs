@@ -1,7 +1,8 @@
 <template>
-  <div v-if="isLoading" class="loading-overlay flex-container">
+  <div v-if="show" class="loading-overlay flex-container">
     <div class="flex-item">
-      <i class="fa fa-circle-o-notch fa-3x fa-spin"></i>
+      <i class="fa fa-circle-o-notch fa-spin"></i>
+
     </div>
   </div>
 </template>
@@ -11,13 +12,11 @@
 
   export default {
     name: 'VdLoading',
-    watch: {
-      isLoading (val) {
-        console.log('loading', val);
-      }
-    },
     computed: {
-      ...mapGetters({isLoading: 'isLoading'})
+      ...mapGetters({isLoading: 'isLoading'}),
+      show () {
+        return this.isLoading && this.isLoading.isLoading;
+      }
     }
   };
 </script>
@@ -45,6 +44,11 @@
 
   .flex-item {
     text-align: center;
+  }
+
+  .fa {
+    font-size: 3rem;
+    color: #7f7f7f;
   }
 
 </style>

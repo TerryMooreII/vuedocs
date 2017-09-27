@@ -9,6 +9,7 @@ import Comments from '@/components/Comments';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -35,5 +36,8 @@ export default new Router({
       name: 'register',
       component: Register
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 };
+  }
 });

@@ -48,7 +48,7 @@
       }
     },
     watch: {
-      '$route.query.page' (newVal, oldVal) {
+      '$route.query' (newVal, oldVal) {
         if (oldVal) {
           this.getArticles();
         }

@@ -7,7 +7,7 @@ const state = {
 
 // getters
 const getters = {
-  isLoading: state => state.show
+  isLoading: state => state.isLoading
 };
 
 // actions
