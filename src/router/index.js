@@ -17,12 +17,12 @@ export default new Router({
       component: Articles
     },
     {
-      path: '/:id',
+      path: '/articles/:id',
       name: 'comments',
       component: Comments
     },
     {
-      path: '/add',
+      path: 'articles/add',
       name: 'add-article',
       component: ArticleForm
     },
@@ -35,6 +35,10 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ],
   scrollBehavior (to, from, savedPosition) {

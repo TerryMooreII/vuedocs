@@ -15,10 +15,6 @@
                          :to="{ name: 'comments', params: { id: article._id }}">{{article.commentCount || 0}} Comments</router-link>
           </span>
         </p>
-        <!--<a class="twitter-share-button has-text-grey" target="_blank"-->
-        <!--:href="twitterUrl">-->
-        <!--<span class="icon is-small"><i class="fa fa-twitter"></i></span>&nbspTweet-->
-        <!--</a>-->
       </div>
       <div>
         <span class="tag is-primary is-capitalized" v-for="tag in article.tags">{{tag}}</span>
@@ -52,7 +48,8 @@
     },
     computed: {
       twitterUrl () {
-        return `https://twitter.com/intent/tweet?text=${this.article.title} ${this.article.url} @vuedocs`;
+        const url = 'https://vuedocs.io/articles/' + this.article._id;
+        return `https://twitter.com/intent/tweet?text=${this.article.title} ${url} @vuedocs`;
       },
       getHostName () {
         if (!this.article || !this.article.url) {

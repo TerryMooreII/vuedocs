@@ -11,9 +11,11 @@
             <div class="field">
               <label class="label">Title</label>
               <div class="control has-icons-right">
-                <input :class="{'input': true, 'is-danger': errors.has('title'), 'is-success': !errors.has('title') && fields.title && fields.title.touched }"
-                       type="text" name="title" placeholder="Article Title" v-model="article.title" v-validate="'required'">
-                <span class="icon is-small is-right" v-show="!errors.has('title') && fields.title && fields.title.touched">
+                <input
+                  :class="{'input': true, 'is-danger': errors.has('title'), 'is-success': !errors.has('title') && fields.title && fields.title.touched }"
+                  type="text" name="title" placeholder="Article Title" v-model="article.title" v-validate="'required'">
+                <span class="icon is-small is-right"
+                      v-show="!errors.has('title') && fields.title && fields.title.touched">
                   <i class="fa fa-check"></i>
                 </span>
               </div>
@@ -24,8 +26,10 @@
             <div class="field">
               <label class="label">URL</label>
               <div class="control has-icons-right">
-                <input :class="{'input': true, 'is-danger': errors.has('url'), 'is-success': !errors.has('url') && fields.url && fields.url.touched }"
-                       name="url" type="text" placeholder="URL to the Article" v-model="article.url" v-validate="'required|url'">
+                <input
+                  :class="{'input': true, 'is-danger': errors.has('url'), 'is-success': !errors.has('url') && fields.url && fields.url.touched }"
+                  name="url" type="text" placeholder="URL to the Article" v-model="article.url"
+                  v-validate="'required|url'">
                 <span class="icon is-small is-right" v-show="!errors.has('url') && fields.url && fields.url.touched">
                   <i class="fa fa-check"></i>
                 </span>
@@ -64,11 +68,12 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="field">
               <label class="label">Tags</label>
               <div class="control has-icons-right">
-                <input class="input"  name="tag" type="text" placeholder="Add Tag" v-model="tag" @keydown.enter.prevent="addTag">
+                <input class="input" name="tag" type="text" placeholder="Add Tag" v-model="tag"
+                       @keydown.enter.prevent="addTag">
               </div>
 
               <div>
@@ -114,12 +119,12 @@
           version: ''
         },
         types: [
-          { title: 'Blog', value: 'blog' },
-          { title: 'How To', value: 'how-to' },
-          { title: 'Video', value: 'video' },
-          { title: 'Code', value: 'code' },
-          { title: 'Plugin/Component', value: 'plugin-component' },
-          { title: 'Other', value: 'other' }
+          {title: 'Blog', value: 'blog'},
+          {title: 'How To', value: 'how-to'},
+          {title: 'Video', value: 'video'},
+          {title: 'Code', value: 'code'},
+          {title: 'Plugin/Component', value: 'plugin-component'},
+          {title: 'Other', value: 'other'}
         ],
         versions: [
           'All',
@@ -172,6 +177,6 @@
 
 <style scoped>
   .tag {
-    margin-right:4px;
+    margin-right: 4px;
   }
 </style>

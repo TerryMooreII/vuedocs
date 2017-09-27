@@ -12,11 +12,6 @@ const getters = {
 
 // actions
 const actions = {
-  // setUser ({ commit }) {
-  //   shop.getProducts(products => {
-  //     commit(types.RECEIVE_PRODUCTS, { products })
-  //   })
-  // }
 };
 
 // mutations

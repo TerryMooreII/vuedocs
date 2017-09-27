@@ -61,7 +61,13 @@
         this.$router.push(this.$route.path + '?thread=' + this.comment.slug);
       },
       removeComment () {
-        axios.delete(`comments/${this.comment._id}`).then(response => { console.log('Comment Deleted'); });
+        axios.delete(`comments/${this.comment._id}`).then(response => {
+          this.$notify({
+            group: 'messages',
+            type: 'error',
+            text: 'Comment has been removed'
+          });
+        });
       }
     },
     computed: {
