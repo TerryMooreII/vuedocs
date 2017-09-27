@@ -8,7 +8,7 @@
         <router-view></router-view>
       </div>
     </section>
-    <notifications group="messages" position="top center"/>
+    <notifications group="messages" position="top center"></notifications>
     <vd-footer></vd-footer>
     <vd-loading></vd-loading>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
   import axios from 'axios';
-  import { mapGetters } from 'vuex';
+  import {mapGetters} from 'vuex';
   import * as types from './store/mutation-types';
   import VdNavbar from './components/Navbar';
   import VdFooter from './components/Footer';
@@ -38,7 +38,13 @@
       let count = 0;
       axios.interceptors.request.use((config) => {
         count++;
-        this.$store.commit(types.LOADING, {isLoading: true});
+
+        setTimeout(() => {
+          if (count > 0) {
+            this.$store.commit(types.LOADING, {isLoading: true});
+          }
+        }, 1000);
+
         return config;
       }, (error) => {
         this.$store.commit(types.LOADING, {isLoading: false});
