@@ -7,7 +7,7 @@
     </div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
-        <vd-pager :page="page" :total="articles.length || 0"></vd-pager>
+        <vd-pager :page="page" :total="articles.length || 0" @change="pageChanged"></vd-pager>
       </div>
     </div>
     <hr>
@@ -46,7 +46,7 @@
       }
     },
     watch: {
-      $route (newVal, oldVal) {
+      '$route.query.page' (newVal, oldVal) {
         if (oldVal) {
           this.getArticles();
         }
@@ -57,6 +57,15 @@
         const query = this.$route.query ? '?' + urlHelpers.serialize(this.$route.query) : '';
         axios.get('articles' + query).then(response => {
           this.articles = response.data;
+        });
+      },
+      pageChanged (val) {
+        let query = Object.assign({}, this.$route.query);
+        query.page = val;
+
+        this.$router.push({
+          name: 'articles',
+          query
         });
       }
     },

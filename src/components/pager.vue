@@ -10,7 +10,7 @@ export default {
   name: 'VdPager',
   props: {
     page: {
-      type: String,
+      type: Number | String,
       required: false,
       default: 1
     },
@@ -26,12 +26,18 @@ export default {
   },
   methods: {
     change (val) {
-      let query = this.$route.query;
-      query.page = this.page ? parseInt(this.page) + val : 1;
-      this.$router.push({
-        name: this.$route.path,
-        query
-      });
+//      let query = this.$route.query;
+//      query.page = ;
+//      console.log({
+//        name: 'articles',
+//        query
+//      });
+//      this.$router.push({
+//        name: 'articles',
+//        query
+//      });
+      //
+      this.$emit('change', this.page ? parseInt(this.page) + val : 1);
     }
   }
 };
