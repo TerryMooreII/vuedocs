@@ -29,7 +29,7 @@ export default {
   },
   data () {
     return {
-      title: 'Vue Docs'
+      title: 'Vue News'
     };
   }
 };
