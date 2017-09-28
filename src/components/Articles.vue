@@ -2,6 +2,7 @@
   <div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
+        <vd-welcome-message></vd-welcome-message>
         <vd-article v-for="article in articles" :key="article._id" :article="article"></vd-article>
       </div>
     </div>
@@ -27,6 +28,7 @@
   import Search from './Search.vue';
   import VdArticle from './Article.vue';
   import VdPager from './Pager.vue';
+  import VdWelcomeMessage from './WelcomeMessage.vue';
 
   import * as urlHelpers from '../services/urlHelpers';
 
@@ -35,7 +37,8 @@
     components: {
       search: Search,
       'vd-article': VdArticle,
-      'vd-pager': VdPager
+      'vd-pager': VdPager,
+      'vd-welcome-message': VdWelcomeMessage
     },
     data () {
       return {

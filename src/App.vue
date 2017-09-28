@@ -4,11 +4,13 @@
     <vd-navbar></vd-navbar>
 
     <section class="section">
-      <div class="container">
+      <div class="container main">
         <router-view></router-view>
       </div>
     </section>
+
     <notifications group="messages" position="top center"></notifications>
+
     <vd-footer></vd-footer>
     <vd-loading></vd-loading>
   </div>
@@ -25,7 +27,6 @@
   export default {
     name: 'app',
     components: {
-      VdFooter,
       'vd-navbar': VdNavbar,
       'vd-footer': VdFooter,
       'vd-loading': VdLoading
@@ -99,5 +100,9 @@
   body {
     font-size: .9rem;
     line-height: 1.2;
+  }
+
+  .main {
+    margin-top: 25px;
   }
 </style>
