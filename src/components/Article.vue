@@ -108,7 +108,7 @@
   .article-title:hover {
     color: #7a7a7a;
   }
-  .article-domain  {
+  .article-domain:hover  {
     text-decoration: underline;
   }
 </style>
