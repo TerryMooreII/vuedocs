@@ -3,6 +3,7 @@
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
         <vd-welcome-message></vd-welcome-message>
+        <vd-tabs-filter></vd-tabs-filter>
         <vd-article v-for="article in articles" :key="article._id" :article="article"></vd-article>
       </div>
     </div>
@@ -28,6 +29,7 @@
   import Search from './Search.vue';
   import VdArticle from './Article.vue';
   import VdPager from './Pager.vue';
+  import VdTabsFilter from './TabsFilter.vue';
   import VdWelcomeMessage from './WelcomeMessage.vue';
 
   import * as urlHelpers from '../services/urlHelpers';
@@ -38,7 +40,8 @@
       search: Search,
       'vd-article': VdArticle,
       'vd-pager': VdPager,
-      'vd-welcome-message': VdWelcomeMessage
+      'vd-welcome-message': VdWelcomeMessage,
+      'vd-tabs-filter': VdTabsFilter
     },
     data () {
       return {
