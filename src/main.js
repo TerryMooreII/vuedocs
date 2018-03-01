@@ -10,13 +10,20 @@ import router from './router';
 import store from './store';
 import axios from 'axios';
 import VueTimeagoFilter from './filters/timeago';
-
+import Ads from 'vue-google-adsense';
+ 
 axios.defaults.baseURL = process.env.API_URL;
 
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
 Vue.use(VueTimeagoFilter);
 Vue.use(Notifications);
+
+Vue.use(require('vue-script2'));
+
+Vue.use(Ads.Adsense);
+Vue.use(Ads.InArticleAdsense);
+Vue.use(Ads.InFeedAdsense);
 
 /* eslint-disable no-new */
 new Vue({

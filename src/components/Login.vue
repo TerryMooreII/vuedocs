@@ -6,6 +6,8 @@
           <p>Login</p>
         </div>
         <div class="message-body">
+          <vd-social-login /> 
+          <hr>
           <form @submit.prevent="onSubmit">
             <div class="is-size-5 has-text-danger is-bold has-text-centered" v-if="error">
               Invalid Username or password.
@@ -40,8 +42,6 @@
               <button class="button is-primary" :disabled="errors.any()">Submit</button>
               <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
             </div>
-
-
           </form>
         </div>
       </article>
@@ -52,9 +52,13 @@
 <script>
 import Auth from '../services/Auth';
 import * as types from '../store/mutation-types';
+import VdSocialLogin from './SocialLogin';
 
 export default {
   name: 'VdLogin',
+  components: {
+    'vd-social-login': VdSocialLogin
+  },
   data () {
     return {
       redirect: '/',
@@ -89,5 +93,5 @@ export default {
 
 
 <style scoped>
-
+  
 </style>

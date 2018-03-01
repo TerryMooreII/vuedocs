@@ -71,6 +71,11 @@
         });
         return Promise.reject(error);
       });
+      const urlToken = this.getIdToken();
+
+      if (urlToken) {
+        localStorage.setItem('id_token', urlToken);
+      }
 
       const token = localStorage.getItem('id_token');
       if (token) {
@@ -79,8 +84,18 @@
           this.$store.commit(types.SET_USER, {user: response.data});
         });
       }
+    },
+    methods: {
+      getParameterByName (name) {
+        var match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+      },
+      getIdToken () {
+        return this.getParameterByName('id_token');
+      }
     }
   };
+
 </script>
 
 <style>

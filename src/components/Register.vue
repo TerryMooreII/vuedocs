@@ -3,11 +3,12 @@
     <div class="column is-offset-2 is-two-thirds">
       <article class="message is-primary">
         <div class="message-header">
-          <p>Register</p>
+          <p>Sign Up</p>
         </div>
         <div class="message-body">
+          <vd-social-login /> 
+          <hr>
           <form @submit.prevent="onSubmit">
-
             <div class="field">
               <label class="label">Username</label>
               <div class="control has-icons-right">
@@ -59,8 +60,13 @@
 <script>
 import axios from 'axios';
 
+import VdSocialLogin from './SocialLogin';
+
 export default {
   name: 'VdRegister',
+  components: {
+    'vd-social-login': VdSocialLogin
+  },
   data () {
     return {
       user: {

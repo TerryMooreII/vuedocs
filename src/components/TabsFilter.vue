@@ -1,7 +1,7 @@
 <template>
   <div class="tabs is-centered">
     <ul>
-      <li><router-link :to="{name:'articles'}">Top</router-link></li>
+      <li><router-link :to="{name:'articles'}">Top Articles</router-link></li>
       <li><router-link :to="{name:'articles', query: {orderby: 'recent'}}">Recent</router-link></li>
       <!--<li><router-link :to="{name:'articles'}">Comments</router-link></li>-->
       <!--<li><router-link :to="{name:'articles'}">Search</router-link></li>-->

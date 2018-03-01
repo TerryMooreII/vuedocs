@@ -2,6 +2,10 @@
   <div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
+        <Adsense
+            data-ad-client="ca-pub-9441079741833119"
+            data-ad-slot="1234567890">
+        </Adsense>
         <vd-welcome-message></vd-welcome-message>
         <vd-tabs-filter></vd-tabs-filter>
         <vd-article v-for="article in articles" :key="article._id" :article="article"></vd-article>

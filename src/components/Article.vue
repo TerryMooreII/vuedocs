@@ -17,7 +17,7 @@
         </p>
       </div>
       <div>
-        <span class="tag is-primary is-capitalized" v-for="tag in article.tags">{{tag}}</span>
+        <span class="tag is-primary is-capitalized" v-for="tag in article.tags" :key="tag">{{tag}}</span>
       </div>
     </div>
   </article>
