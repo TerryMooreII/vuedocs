@@ -2,8 +2,8 @@
   <div :class="{notification: true, 'is-info': true, 'is-block': !hidden}" v-if="!user">
     <button class="delete" @click="hide" title="Hide this forever!"></button>
     <strong>Welcome!</strong>
-    VueNews.io is your one stop site for all Vue.js news, blog posts, the latest components, or anything else Vue.js related.
-    Its time to
+    VueNews.io is your one stop site for all the latest Vue.js news, blog posts, the latest components, or anything else Vue.js related.
+    It's time to
     <router-link :to="{name: 'register'}">sign Up</router-link>
     and be a part of the latest and greatest JavaScript community!
   </div>
