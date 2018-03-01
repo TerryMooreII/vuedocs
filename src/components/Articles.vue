@@ -4,11 +4,19 @@
       <div class="column is-offset-1-desktop is-10-desktop">
         <Adsense
             data-ad-client="ca-pub-9441079741833119"
-            data-ad-slot="1234567890">
+            data-ad-slot="3887795199">
         </Adsense>
         <vd-welcome-message></vd-welcome-message>
         <vd-tabs-filter></vd-tabs-filter>
-        <vd-article v-for="article in articles" :key="article._id" :article="article"></vd-article>
+        <div v-for="(article, index) in articles" :key="article._id" v-bind:class="{border: index !==0}">
+          <vd-article  :article="article"></vd-article>
+          <InFeedAdsense v-if="(index + 1) % 7 === 0"
+              data-ad-layout-key="-hq-1+20-7z+8j"
+              data-ad-client="ca-pub-9441079741833119"
+              data-ad-slot="1505174430">
+          </InFeedAdsense>
+        </div>
+        
       </div>
     </div>
     <div class="columns">
@@ -23,9 +31,7 @@
         <search></search>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -89,5 +95,9 @@
 
 
 <style scoped>
-
+  .border {
+    border-top: 1px solid rgba(219,219,219,.5);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
 </style>

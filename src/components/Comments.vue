@@ -7,13 +7,21 @@
     </div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
+        <Adsense
+            data-ad-client="ca-pub-9441079741833119"
+            data-ad-slot="3887795199">
+        </Adsense>
+      </div>
+    </div> 
+    <div class="columns">
+      <div class="column is-offset-1-desktop is-10-desktop">
         <vd-comment-add :showCancel="true"></vd-comment-add>
       </div>
     </div>
     <div class="columns" v-if="$route.query.thread">
       <div class="column is-offset-1-desktop is-10-desktop">
         <div class="notification is-warning">
-          You are only view a single comment thread.
+          You are only viewing a single comment thread.
           <br>
           <router-link :to="{path: $route.path}">view the rest of the comments</router-link>
         </div>
