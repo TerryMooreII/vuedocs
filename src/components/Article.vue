@@ -8,7 +8,7 @@
           <small><em>(<a class="has-text-grey-dark article-domain" :href="article.url">{{getHostName}}</a>)</em></small>
         </p>
         <p class="info">
-          <span class="has-text-grey-dark">{{article.submittedBy}}</span>
+          <span class="has-text-grey-dark">{{submittedBy}}</span>
           <small><em class="has-text-grey">{{ article.submittedDate | timeago }}</em></small>
           <span class="comment" v-if="article._id && !hideCommentLink">
             <router-link class="has-text-grey"
@@ -47,6 +47,12 @@
       }
     },
     computed: {
+      submittedBy (article) {
+        if (this.article && this.article.submittedBy && this.article.submittedBy.username) {
+          return this.article.submittedBy.username;
+        }
+        return '';
+      },
       twitterUrl () {
         const url = 'https://vuedocs.io/articles/' + this.article._id;
         return `https://twitter.com/intent/tweet?text=${this.article.title} ${url} @vuedocs`;

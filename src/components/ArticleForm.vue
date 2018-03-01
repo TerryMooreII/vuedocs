@@ -77,7 +77,7 @@
               </div>
 
               <div>
-                <span class="tag is-primary" v-for="(tag, index) in article.tags">
+                <span class="tag is-primary" v-for="(tag, index) in article.tags" :key="tag">
                   {{tag}}
                   <button type="button" class="delete is-small" @click="removeTag(index)"></button>
                 </span>
@@ -155,7 +155,7 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.article.submittedDate = Date.now();
-            this.article.submittedBy = this.user.username;
+            this.article.submittedBy = this.user;
             if (!this.article.url.startsWith('http')) {
               this.article.url = 'http://' + this.article.url;
             }
