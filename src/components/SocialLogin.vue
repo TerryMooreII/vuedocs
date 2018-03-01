@@ -27,7 +27,7 @@ export default {
   methods: {
     oauthLogin (provider) {
       const api = process.env.API_URL;
-      window.location.href = `${api}/oauth/${provider}`;
+      window.location.href = `${api}oauth/${provider}`;
     }
   }
 };
