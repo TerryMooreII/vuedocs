@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Articles from '@/components/Articles';
+import CommentsList from '@/components/CommentsList';
 import ArticleForm from '@/components/ArticleForm';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
@@ -25,6 +26,11 @@ export default new Router({
       path: 'articles/add',
       name: 'add-article',
       component: ArticleForm
+    },
+    {
+      path: '/comments',
+      name: 'comments-list',
+      component: CommentsList
     },
     {
       path: '/login',

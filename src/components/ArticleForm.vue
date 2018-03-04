@@ -21,8 +21,6 @@
               </div>
               <p v-show="errors.has('title')" class="help is-danger">{{ errors.first('title') }}</p>
             </div>
-
-
             <div class="field">
               <label class="label">URL</label>
               <div class="control has-icons-right">
@@ -38,49 +36,28 @@
               <p v-show="errors.has('url')" class="help is-danger">{{ errors.first('url') }}</p>
             </div>
 
-            <div class="columns">
-              <div class="column">
-                <div class="field">
-                  <label class="label">Vue Version</label>
-                  <div class="select is-fullwidth">
-                    <select v-model="article.version" name="version">
-                      <option></option>
-                      <option v-for="option in versions" v-bind:value="option">
-                        {{ option }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="column">
-                <div class="field">
-                  <label class="label">Article Type</label>
-                  <div class="select is-fullwidth">
-                    <select v-model="article.type" name="type">
-
-                      <option></option>
-                      <option v-for="option in types" v-bind:value="option.value">
-                        {{ option.title }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="field">
               <label class="label">Tags</label>
               <div class="control has-icons-right">
                 <input class="input" name="tag" type="text" placeholder="Add Tag" v-model="tag"
                        @keydown.enter.prevent="addTag">
               </div>
-
               <div>
                 <span class="tag is-primary" v-for="(tag, index) in article.tags" :key="tag">
                   {{tag}}
                   <button type="button" class="delete is-small" @click="removeTag(index)"></button>
                 </span>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Category</label>
+              <div class="select is-fullwidth">
+                <select v-model="article.type" name="type" v-on:change="updateTitle()">
+                  <option v-for="option in types" v-bind:value="option.value" :key="option.value" >
+                    {{ option.title }}
+                  </option>
+                </select>
               </div>
             </div>
             <br>
@@ -115,35 +92,30 @@
           votesDown: 0,
           votesUp: 0,
           title: '',
-          url: '',
-          version: ''
+          url: ''
         },
         types: [
-          {title: 'Blog', value: 'blog'},
-          {title: 'How To', value: 'how-to'},
-          {title: 'Video', value: 'video'},
-          {title: 'Code', value: 'code'},
-          {title: 'Plugin/Component', value: 'plugin-component'},
-          {title: 'Other', value: 'other'}
-        ],
-        versions: [
-          'All',
-          'N/A',
-          '1.x',
-          '2.x',
-          '2.0.x',
-          '2.1.x',
-          '2.2.x',
-          '2.3.x',
-          '2.4.x',
-          '2.5.x'
+          {title: 'Article', value: 'article', slug: ''},
+          {title: 'Show', value: 'show', slug: '[Show]'},
+          {title: 'Ask', value: 'ask', slug: '[Ask]'},
+          {title: 'Job Posting', value: 'job', slug: '[Job]'}
         ]
       };
     },
     computed: mapGetters({
       user: 'getUser'
     }),
+    created () {
+      this.article.type = this.types[0].value;
+    },
     methods: {
+      updateTitle () {
+        this.types.forEach((type) => {
+          this.article.title = this.article.title.replace(type.slug, '');
+        });
+        const slug = this.types.filter(type => this.article.type === type.value);
+        this.article.title = slug[0].slug + (slug[0].slug ? ' ' : '') + this.article.title.trim();
+      },
       addTag (event) {
         this.article.tags.push(event.target.value);
         this.tag = null;
@@ -178,5 +150,6 @@
 <style scoped>
   .tag {
     margin-right: 4px;
+    margin-top: 4px;
   }
 </style>

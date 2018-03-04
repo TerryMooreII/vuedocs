@@ -12,7 +12,7 @@
           <small><em class="has-text-grey">{{ article.submittedDate | timeago }}</em></small>
           <span class="comment" v-if="article._id && !hideCommentLink">
             <router-link class="has-text-grey"
-                         :to="{ name: 'comments', params: { id: article._id }}">{{article.commentCount || 0}} Comments</router-link>
+              :to="{ name: 'comments', params: { id: article._id }}">{{article.commentCount || 0}} Comments</router-link>
           </span>
         </p>
       </div>
