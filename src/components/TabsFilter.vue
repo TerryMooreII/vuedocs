@@ -3,7 +3,7 @@
     <ul>
       <li><router-link :to="{name:'articles'}">Top Articles</router-link></li>
       <li><router-link :to="{name:'articles', query: {orderby: 'recent'}}">Recent</router-link></li>
-      <!--<li><router-link :to="{name:'articles'}">Comments</router-link></li>-->
+      <li><router-link :to="{name:'comments-list'}">Comments</router-link></li>
       <!--<li><router-link :to="{name:'articles'}">Search</router-link></li>-->
     </ul>
   </div>
