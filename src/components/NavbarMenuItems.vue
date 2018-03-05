@@ -8,7 +8,7 @@
     <div class="dropdown is-hoverable is-right" v-if="user">
       <div class="dropdown-trigger">
         <button class="button is-white" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span class="is-hidden-mobile">{{user.displayName}}</span>
+          <span class="is-hidden-mobile">{{user.displayName || user.username}}</span>
           <img class="image is-24x22 round" v-bind:src="user.profileImage" v-if="user.profileImage"/>
           <div class="inital is-24x22 round" v-if="!user.profileImage">{{firstInitial()}}</div>
         </button>

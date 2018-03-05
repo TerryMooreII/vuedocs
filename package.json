@@ -8,10 +8,11 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "deploy": "firebase deploy --project vue-docs",
+    "firebase": "firebase deploy --project vue-docs",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "deploy": "npm run build && npm run firebase"
   },
   "dependencies": {
     "axios": "^0.16.2",
