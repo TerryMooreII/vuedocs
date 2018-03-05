@@ -2,12 +2,15 @@
   <div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
+        <vd-tabs-filter></vd-tabs-filter>
         <Adsense
             data-ad-client="ca-pub-9441079741833119"
             data-ad-slot="3887795199">
-        </Adsense>        
-        
-          
+        </Adsense>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-offset-1-desktop is-10-desktop">
         <article class="media" v-for="(comment, index) in comments" :key="comment._id" v-bind:class="{border: index !==0}">
           <figure class="media-left is-hidden-mobile">
             <p class="image is-32x32">
@@ -40,12 +43,14 @@
 import axios from 'axios';
 
 import VdPager from './pager';
-// import urlHelpers from '../services/urlHelpers';
+import VdTabsFilter from './TabsFilter';
+import * as urlHelpers from '../services/urlHelpers';
 
 export default {
   name: 'VdCommentsList',
   components: {
-    'vd-pager': VdPager
+    'vd-pager': VdPager,
+    'vd-tabs-filter': VdTabsFilter
   },
   data () {
     return {
@@ -66,7 +71,7 @@ export default {
   },
   methods: {
     getComments () {
-      const query = ''; // this.$route.query; // ? '?' + urlHelpers.serialize(this.$route.query) : '';
+      const query = this.$route.query ? '?' + urlHelpers.serialize(this.$route.query) : '';
       axios.get('comments' + query).then(response => {
         this.comments = response.data;
       });

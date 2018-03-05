@@ -2,7 +2,6 @@
   <div v-if="show" class="loading-overlay flex-container">
     <div class="flex-item">
       <i class="fa fa-circle-o-notch fa-spin"></i>
-
     </div>
   </div>
 </template>

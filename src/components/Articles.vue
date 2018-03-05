@@ -2,12 +2,17 @@
   <div>
     <div class="columns">
       <div class="column is-offset-1-desktop is-10-desktop">
+        
+        <vd-welcome-message></vd-welcome-message>
+        <vd-tabs-filter></vd-tabs-filter>
         <Adsense
             data-ad-client="ca-pub-9441079741833119"
             data-ad-slot="3887795199">
         </Adsense>
-        <vd-welcome-message></vd-welcome-message>
-        <vd-tabs-filter></vd-tabs-filter>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-offset-1-desktop is-10-desktop">    
         <div v-for="(article, index) in articles" :key="article._id" v-bind:class="{border: index !==0}">
           <vd-article  :article="article"></vd-article>
           <InFeedAdsense v-if="(index + 1) % 7 === 0"
@@ -16,7 +21,6 @@
               data-ad-slot="1505174430">
           </InFeedAdsense>
         </div>
-        
       </div>
     </div>
     <div class="columns">
@@ -25,7 +29,6 @@
       </div>
     </div>
     <hr>
-
     <div class="columns">
       <div class="column is-half is-offset-one-quarter is-full-mobile">
         <search></search>

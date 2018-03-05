@@ -17,7 +17,9 @@
         </p>
       </div>
       <div>
-        <span class="tag is-primary is-capitalized" v-for="tag in article.tags" :key="tag">{{tag}}</span>
+
+        <router-link class="tag is-primary is-capitalized" v-for="tag in article.tags" :key="tag" :to="{ name: 'articles', query: { tags: tag }}">{{tag}}</router-link>
+
       </div>
     </div>
   </article>
