@@ -5,7 +5,7 @@
         <vd-tabs-filter></vd-tabs-filter>
         <Adsense
             data-ad-client="ca-pub-9441079741833119"
-            data-ad-slot="3887795199">
+            data-ad-slot="4385680149">
         </Adsense>
       </div>
     </div>

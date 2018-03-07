@@ -16,9 +16,9 @@
         <div v-for="(article, index) in articles" :key="article._id" v-bind:class="{border: index !==0}">
           <vd-article  :article="article"></vd-article>
           <InFeedAdsense v-if="(index + 1) % 7 === 0"
-              data-ad-layout-key="-hq-1+20-7z+8j"
+              data-ad-layout-key="-h6-1+20-7z+8j"
               data-ad-client="ca-pub-9441079741833119"
-              data-ad-slot="1505174430">
+              data-ad-slot="1505174430" class="border">
           </InFeedAdsense>
         </div>
       </div>
