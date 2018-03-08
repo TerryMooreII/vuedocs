@@ -1,4 +1,5 @@
 import * as types from '../mutation-types';
+import axios from 'axios';
 
 // initial state
 const state = {
@@ -12,11 +13,11 @@ const getters = {
 
 // actions
 const actions = {
-  // setUser ({ commit }) {
-  //   shop.getProducts(products => {
-  //     commit(types.RECEIVE_PRODUCTS, { products })
-  //   })
-  // }
+  updateUser ({ commit, state }, user) {
+    return axios.put('/users/me', user).then((response) => {
+      commit(types.SET_USER, { user: response.data });
+    });
+  }
 };
 
 // mutations

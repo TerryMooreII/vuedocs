@@ -15,10 +15,10 @@
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
+          <router-link :to="{name: 'profile'}" class="dropdown-item">
             <i class="fa fa-fw fa-user"></i>
             Manage Profile
-          </a>
+          </router-link>
           <hr class="dropdown-divider">
           <a href="#" class="dropdown-item" @click="logout">
             <i class="fa fa-fw fa-sign-out"></i>
@@ -57,9 +57,11 @@
         return 'X';
       }
     },
-    computed: mapGetters({
-      user: 'getUser'
-    })
+    computed: {
+      ...mapGetters({
+        user: 'getUser'
+      })
+    }
   };
 </script>
 

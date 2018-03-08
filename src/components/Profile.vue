@@ -1,14 +1,24 @@
 <template>
-  <div class="columns">
+    <div class="columns">
     <div class="column is-offset-2 is-two-thirds">
       <article class="message is-primary">
         <div class="message-header">
-          <p>Sign Up</p>
+          <p>Update Profole</p>
         </div>
         <div class="message-body">
-          <vd-social-login /> 
-          <hr>
           <form @submit.prevent="onSubmit">
+            <div class="field">
+              <label class="label">Display Name</label>
+              <div class="control has-icons-right">
+                <input :class="{'input': true, 'is-danger': errors.has('displayName'), 'is-success': !errors.has('displayName') && fields.displayName && fields.displayName.touched }"
+                       type="text" name="displayName" placeholder="Display Name" v-model="user.displayName" v-validate="'required'">
+                <span class="icon is-small is-right" v-show="!errors.has('displayName') && fields.displayName && fields.displayName.touched">
+                  <i class="fa fa-check"></i>
+                </span>
+              </div>
+              <p v-show="errors.has('displayName')" class="help is-danger">{{ errors.first('displayName') }}</p>
+            </div>
+
             <div class="field">
               <label class="label">Username</label>
               <div class="control has-icons-right">
@@ -25,7 +35,7 @@
               <label class="label">Email</label>
               <div class="control has-icons-right">
                 <input :class="{'input': true, 'is-danger': errors.has('email'), 'is-success': !errors.has('email') && fields.email && fields.email.touched }"
-                       type="email" name="email" placeholder="Email Address" v-model="user.email" v-validate="'required|email'">
+                       type="email" name="email" placeholder="Email Address" v-model="user.email" v-validate="'email'">
                 <span class="icon is-small is-right" v-show="!errors.has('email') && fields.email && fields.email.touched">
                   <i class="fa fa-check"></i>
                 </span>
@@ -33,7 +43,7 @@
               <p v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</p>
             </div>
 
-            <div class="field">
+            <!-- <div class="field">
               <label class="label">Password</label>
               <div class="control has-icons-right">
                 <input :class="{'input': true, 'is-danger': errors.has('password'), 'is-success': !errors.has('password') && fields.password && fields.password.touched }"
@@ -43,18 +53,11 @@
                 </span>
               </div>
               <p v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</p>
-            </div>
+            </div> -->
 
-            
             <div class="field">
-              <vue-recaptcha 
-                sitekey="6LeGYksUAAAAAGxvtp7mTBInOcaWGwXQYgzkIRSt"
-                ref="recaptcha"
-                @verify="onVerify">
-                <button class="button is-primary" :disabled="errors.any()">Submit</button>
-                <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
-              </vue-recaptcha>
-              
+              <button class="button is-primary" :disabled="errors.any()">Save</button>
+              <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
             </div>
 
           </form>
@@ -65,42 +68,27 @@
 </template>
 
 <script>
-import VueRecaptcha from 'vue-recaptcha';
 import axios from 'axios';
 
-import VdSocialLogin from './SocialLogin';
-import Auth from '../services/Auth';
-import * as types from '../store/mutation-types';
-
 export default {
-  name: 'VdRegister',
-  components: {
-    'vd-social-login': VdSocialLogin,
-    VueRecaptcha
-  },
+  name: 'VdProfile',
   data () {
     return {
       user: {
+        displayName: '',
         username: '',
-        email: '',
-        password: ''
+        email: ''
       }
     };
   },
+  created () {
+    axios.get('/users/me').then((response) => {
+      this.user = response.data;
+    });
+  },
   methods: {
     onSubmit () {
-      this.$refs.invisibleRecaptcha.execute();
-    },
-    onVerify (response) {
-      axios.post('/users', this.user).then(() => {
-        Auth.login({
-          username: this.user.username,
-          password: this.user.password
-        }).then((response) => {
-          this.$store.commit(types.SET_USER, {user: response.user});
-          this.$router.push('/');
-        });
-      }).catch(() => this.$refs.recaptcha.reset());
+      this.$store.dispatch('updateUser', this.user).then(() => this.$router.push('/articles'));
     }
   }
 };
