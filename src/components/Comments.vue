@@ -9,7 +9,7 @@
       <div class="column is-offset-1-desktop is-10-desktop">
         <Adsense
             data-ad-client="ca-pub-9441079741833119"
-            data-ad-slot="3887795199">
+            data-ad-slot="8355249700">
         </Adsense>
       </div>
     </div> 
