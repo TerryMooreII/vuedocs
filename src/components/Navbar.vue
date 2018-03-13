@@ -37,10 +37,14 @@ export default {
 
 
 <style scoped>
-  nav{
+  nav {
     position:fixed;
     width: 100%;
     background-color: white;
     z-index: 1000;
+  }
+  .navbar-brand {
+    overflow-x: inherit;
+    overflow-y: inherit;
   }
 </style>

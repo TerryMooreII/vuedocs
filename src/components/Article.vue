@@ -8,7 +8,7 @@
           <small><em>(<a class="has-text-grey-dark article-domain" :href="article.url">{{getHostName}}</a>)</em></small>
         </p>
         <p class="info">
-          <span class="has-text-grey-dark">{{submittedBy}}</span>
+          <span class="has-text-grey-dark">{{ article.submittedBy.displayName || article.submittedBy.username }}</span>
           <small><em class="has-text-grey">{{ article.submittedDate | timeago }}</em></small>
           <span class="comment" v-if="article._id && !hideCommentLink">
             <router-link class="has-text-grey"
@@ -17,10 +17,13 @@
         </p>
       </div>
       <div>
-
         <router-link class="tag is-primary is-capitalized" v-for="tag in article.tags" :key="tag" :to="{ name: 'articles', query: { tags: tag }}">{{tag}}</router-link>
-
       </div>
+      <p v-if="article.text && hideCommentLink" >
+        <pre class="article-text has-text-grey-dark">
+          {{article.text}}
+        </pre>
+      </p>
     </div>
   </article>
 </template>
@@ -118,5 +121,19 @@
   }
   .article-domain:hover  {
     text-decoration: underline;
+  }
+
+  .article-text {
+    margin-top: 10px;
+    padding: 10px;
+    min-height: 70px !important;
+    border-radius: 3px;
+    background-color: transparent !important;
+    max-width: 100%;
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: inherit;
+    color: #4a4a4a!important;
+    font-weight: 200;
   }
 </style>

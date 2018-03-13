@@ -21,23 +21,45 @@
               </div>
               <p v-show="errors.has('title')" class="help is-danger">{{ errors.first('title') }}</p>
             </div>
+
             <div class="field">
               <label class="label">URL</label>
               <div class="control has-icons-right">
                 <input
                   :class="{'input': true, 'is-danger': errors.has('url'), 'is-success': !errors.has('url') && fields.url && fields.url.touched }"
-                  name="url" type="text" placeholder="URL to the Article" v-model="article.url"
-                  v-validate="'required|url'">
+                  name="url" type="text" placeholder="URL to the Article" v-model="article.url" :disabled="!urlRequired"
+                  v-validate="urlRequired + '|url'">
                 <span class="icon is-small is-right" v-show="!errors.has('url') && fields.url && fields.url.touched">
                   <i class="fa fa-check"></i>
                 </span>
               </div>
-              <p class="help has-text-grey">Please remove tracking parameters from the end of the URL</p>
+              <p class="help has-text-grey">Please remove the tracking utm query parameters</p>
               <p v-show="errors.has('url')" class="help is-danger">{{ errors.first('url') }}</p>
             </div>
 
             <div class="field">
-              <label class="label">Tags</label>
+              <div class="section-line">
+                <span class="is-size-5">Or</span>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Text</label>
+              <div class="control has-icons-right">
+                <textarea
+                  :class="{'textarea': true, 'is-danger': errors.has('text'), 'is-success': !errors.has('text') && fields.text && fields.text.touched }"
+                  name="text" type="text" placeholder="Ask a question or tell us some info" v-model="article.text"
+                  v-validate="textRequired">
+                </textarea>
+                <span class="icon is-small is-right" v-show="!errors.has('text') && fields.text && fields.text.touched">
+                  <i class="fa fa-check"></i>
+                </span>
+              </div>
+              <p v-show="errors.has('text')" class="help is-danger">{{ errors.first('text') }}</p>
+            </div>
+
+            <div class="field">
+              <label class="label">Tags <span class="has-text-grey is-size-7 optional">(optional)</span></label>
               <div class="control has-icons-right">
                 <input class="input" name="tag" type="text" placeholder="Add Tag" v-model="tag"
                        @keydown.enter.prevent="addTag">
@@ -51,7 +73,7 @@
             </div>
             
             <div class="field">
-              <label class="label">Category</label>
+              <label class="label">Category <span class="has-text-grey is-size-7 optional">(optional)</span></label>
               <div class="select is-fullwidth">
                 <select v-model="article.type" name="type" v-on:change="updateTitle()">
                   <option v-for="option in types" v-bind:value="option.value" :key="option.value" >
@@ -62,10 +84,12 @@
             </div>
             <br>
             <div class="field">
-              <button class="button is-primary" :disabled="errors.any()">Submit</button>
-              <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
+              <p class="control">
+                <button class="button is-primary" :disabled="errors.any()">Submit</button>
+                <router-link :to="{ name: 'articles'}" class="button is-default is-outlined">Cancel</router-link>
+              </p>
+              
             </div>
-
           </form>
         </div>
       </article>
@@ -102,9 +126,17 @@
         ]
       };
     },
-    computed: mapGetters({
-      user: 'getUser'
-    }),
+    computed: {
+      ...mapGetters({
+        user: 'getUser'
+      }),
+      urlRequired () {
+        return this.article.text ? '' : 'required';
+      },
+      textRequired () {
+        return this.article.text ? 'required' : '';
+      }
+    },
     created () {
       this.article.type = this.types[0].value;
     },
@@ -151,5 +183,38 @@
   .tag {
     margin-right: 4px;
     margin-top: 4px;
+  }
+  
+  .section-line {
+    color: hsl(0, 0%, 29%);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    text-transform: lowercase;
+    margin: 20px auto
+  }
+  .section-line:before {
+    border-top: 1px solid hsl(0, 0%, 71%)!important;
+    content:"";
+    margin: 0 auto; /* this centers the line to the full width specified */
+    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+    top: 50%; left: 0; right: 0; bottom: 0;
+    width: 95%;
+    z-index: -1;
+  }
+
+  .section-line > span { 
+    /* to hide the lines from behind the text, you have to set the background color the same as the container */ 
+    background-color: rgb(250, 250, 250);
+    padding: 0 15px; 
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .optional {
+    font-weight: normal;
+    font-style: italic;
   }
 </style>
